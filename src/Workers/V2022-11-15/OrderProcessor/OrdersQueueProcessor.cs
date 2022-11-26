@@ -1,3 +1,5 @@
+using System.Diagnostics.Contracts;
+using Contracts;
 namespace OrderProcessor;
 
 public class OrdersQueueProcessor : QueueWorker<Order>
