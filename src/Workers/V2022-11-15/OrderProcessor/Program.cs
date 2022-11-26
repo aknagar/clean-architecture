@@ -1,4 +1,4 @@
-using OrderProcessor;
+namespace OrderProcessor;
 
 public class Program
 {

@@ -1,4 +1,5 @@
-using OrderProcessor;
+namespace OrderProcessor;
+
 public abstract class QueueWorker<TMessage> : BackgroundService
     {
         protected ILogger<QueueWorker<TMessage>> Logger { get; }
