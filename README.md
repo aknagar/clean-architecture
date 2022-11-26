@@ -8,6 +8,8 @@ dotnet add package Microsoft.Extensions.Logging --version 7.0.0
 dotnet new classlib
 dotnet new webapi
 dotnet build clean-architecture.sln
+dotnet add reference ..\..\..\Contracts\Contracts.csproj
+dotnet sln add .\src\Workers\V2022-11-15\OrderProcessor\OrderProcessor.csproj
 
 dotnet run
 

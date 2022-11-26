@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Text;
+
 namespace OrderProcessor;
 
 public abstract class QueueWorker<TMessage> : BackgroundService
@@ -80,7 +74,7 @@ public abstract class QueueWorker<TMessage> : BackgroundService
         {
             try
             {
-                var rawMessageBody = Encoding.UTF8.GetString(processMessageEventArgs.Message.Body.ToBytes().ToArray());
+                var rawMessageBody = Encoding.UTF8.GetString(processMessageEventArgs.Message.Body);
                 Logger.LogInformation("Received message {MessageId} with body {MessageBody}",
                     processMessageEventArgs.Message.MessageId, rawMessageBody);
 
