@@ -1,4 +1,5 @@
 namespace OrderProcessor;
+namespace Contracts;
 
 public class OrdersQueueProcessor : QueueWorker<Order>
 {
