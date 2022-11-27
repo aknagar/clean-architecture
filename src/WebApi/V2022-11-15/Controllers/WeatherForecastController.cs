@@ -2,6 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace V2022_11_15.Controllers;
 
+/// https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-7.0
+/// [ApiController] enables opinionated behaviors that make it easier to build web APIs. 
+/// Some behaviors include parameter source inference, attribute routing as a requirement, and model validation error-handling enhancements.
+/// [Route] defines the routing pattern [controller]. The [controller] token is replaced by the controller's name (case-insensitive, without the Controller suffix).
+/// This controller handles requests to https://localhost:{PORT}/weatherforecast.
+///
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
