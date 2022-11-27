@@ -46,5 +46,5 @@ https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetco
 %APPDATA%\Microsoft\UserSecrets\
 
 dotnet user-secrets init
-type ..\..\..\local.json | dotnet user-secrets set
+type ..\..\..\secrets.json | dotnet user-secrets set
 dotnet user-secrets clear

@@ -51,7 +51,7 @@
             "preLaunchTask": "build-sln",
             "program": "${workspaceFolder}/src/Workers/V2022-11-15/QueueWorker/bin/Debug/net7.0/QueueWorker.dll",
             "args": [],
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/src/Workers/V2022-11-15/QueueWorker",
             "stopAtEntry": false,
             "console": "internalConsole"
         },        
