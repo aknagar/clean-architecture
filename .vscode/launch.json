@@ -3,7 +3,7 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [
+    "configurations": [    
         {
             "name": ".NET Core Launch (api)",
             "type": "coreclr",
@@ -54,7 +54,18 @@
             "cwd": "${workspaceFolder}/src/Workers/V2022-11-15/QueueWorker",
             "stopAtEntry": false,
             "console": "internalConsole"
-        },        
+        },  
+        {
+            "name": "Console(OrderGenerator)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-sln",
+            "program": "${workspaceFolder}/tools/OrderGenerator/bin/Debug/net7.0/OrderGenerator.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/tools/OrderGenerator",
+            "stopAtEntry": false,
+            "console": "externalTerminal"
+        },      
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
