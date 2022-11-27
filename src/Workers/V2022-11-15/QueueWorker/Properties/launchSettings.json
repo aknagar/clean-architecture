@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "OrderProcessor": {
+    "QueueWorker": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {

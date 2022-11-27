@@ -2,7 +2,7 @@ using Azure.Messaging.ServiceBus;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace OrderProcessor;
+namespace QueueWorker;
 
 public abstract class QueueWorker<TMessage> : BackgroundService
     {

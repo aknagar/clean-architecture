@@ -4,7 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-OrderProcessor-82799d4b-9664-4414-8ab7-6b4690d0fa94</UserSecretsId>
+    <UserSecretsId>dotnet-QueueWorker-90b8c4ac-9b28-40e8-a003-68306681705d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

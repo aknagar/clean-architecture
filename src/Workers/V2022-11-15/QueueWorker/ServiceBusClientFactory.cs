@@ -2,7 +2,8 @@ using Azure.Identity;
 using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-namespace OrderProcessor;
+
+namespace QueueWorker;
 
 public static class ServiceBusClientFactory
     {
