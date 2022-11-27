@@ -37,3 +37,5 @@ error NU1301: Failed to retrieve information about 'Microsoft.Identity.Client.Ex
 Failed to determine the https port for redirect.
 set env variable HTTPS_PORT
 
+## Azure CLI
+az account show

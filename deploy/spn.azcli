@@ -1,0 +1,4 @@
+# List all Service Principals
+az ad sp list --display-name 'CleanArchitecturePlay'
+
+# how to retrieve json attribute from response using cli

@@ -1,0 +1,2 @@
+# Provide access to key vault
+az keyvault set-policy --name cakv-dev --object-id <object-id> --secret-permissions get list --key-permissions get list --certificate-permissions get list
