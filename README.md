@@ -48,3 +48,9 @@ https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetco
 dotnet user-secrets init
 type ..\..\..\secrets.json | dotnet user-secrets set
 dotnet user-secrets clear
+
+## Docker Containers
+https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md
+
+Press F1 to open the Command Palette.
+Type add dev container
