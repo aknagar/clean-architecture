@@ -39,3 +39,12 @@ set env variable HTTPS_PORT
 
 ## Azure CLI
 az account show
+
+## Dotnet secret management
+https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-7.0&tabs=windows
+
+%APPDATA%\Microsoft\UserSecrets\
+
+dotnet user-secrets init
+type ..\..\..\local.json | dotnet user-secrets set
+dotnet user-secrets clear
