@@ -43,14 +43,35 @@ az account show
 ## Dotnet secret management
 https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-7.0&tabs=windows
 
+https://dev.to/gutsav/using-dotnet-secrets-43bg#:~:text=The%20dotnet%20user-secrets%20init%20command%20enables%20storage%20of,to%20identify%20which%20secrets%20belong%20to%20which%20project.
+
 %APPDATA%\Microsoft\UserSecrets\
 
 dotnet user-secrets init
 type ..\..\..\secrets.json | dotnet user-secrets set
 dotnet user-secrets clear
 
+## Logging
+
+High performance
+https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/loggermessage?view=aspnetcore-7.0
+
 ## Docker Containers
+
+https://devblogs.microsoft.com/dotnet/announcing-builtin-container-support-for-the-dotnet-sdk/
+
+dotnet add package Microsoft.NET.Build.Containers
+
+--create container image using dotnet sdk.
+dotnet publish --os linux --arch x64 -c Release -p:PublishProfile=DefaultContainer
+
+# run your app using the new container
+docker run -it --rm -p 5010:80 v2022-11-15:1.0.0
+
+https://learn.microsoft.com/en-us/dotnet/core/docker/publish-as-container
+
 https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md
 
 Press F1 to open the Command Palette.
 Type add dev container
+
