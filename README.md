@@ -75,3 +75,9 @@ https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md
 Press F1 to open the Command Palette.
 Type add dev container
 
+
+## Bicep
+https://ochzhen.com/blog/locks-in-azure-bicep
+https://www.thorsten-hans.com/how-to-deploy-azure-container-apps-with-bicep/
+https://bicepdemo.z22.web.core.windows.net/ 
+Bicep files are idempotent, which means you can deploy the same file many times and get the same resource types in the same state. You can develop one file that represents the desired state,

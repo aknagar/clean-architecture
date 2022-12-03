@@ -2,11 +2,8 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
 	"name": "C# (.NET)",
-	"image": "mcr.microsoft.com/devcontainers/dotnet:0-7.0",
-	"features": {
-		"ghcr.io/devcontainers/features/dotnet:1": {}
-	}
-
+	"image": "aknagar/v2022-11-15:1.0.0"
+	
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 

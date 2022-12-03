@@ -28,3 +28,7 @@ resource ordersQueue 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-preview'
   }
 }
 
+output servicebusId string = servicebus.id
+output servicebusName string = servicebus.name
+output apiVersion string = servicebus.apiVersion
+
