@@ -5,8 +5,7 @@ using Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.ConfigureKeyVaultAppConfiguration<Program>();
-builder.Host.UseSerilog((ctx, lc) => lc
-    .WriteTo.Console());
+builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console());
 
 // https://www.jondjones.com/programming/aspnet-core/how-to/must-know-startupcs-to-programcs-refactoring-tips-in-net-7/ 
 

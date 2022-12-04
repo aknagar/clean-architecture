@@ -51,6 +51,9 @@ dotnet user-secrets init
 type ..\..\..\secrets.json | dotnet user-secrets set
 dotnet user-secrets clear
 
+## F12 No definition found
+Use ctrl-shift-P and select "OmniSharp: Select Project"
+
 ## Logging
 
 High performance

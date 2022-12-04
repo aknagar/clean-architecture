@@ -1,6 +1,7 @@
 using Azure.Messaging.ServiceBus;
 using Newtonsoft.Json;
 using System.Text;
+using Utilities;
 
 namespace QueueWorker;
 
@@ -17,7 +18,7 @@ public abstract class QueueWorker<TMessage> : BackgroundService
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var queueName = Configuration.GetValue<string>("KEDA_SERVICEBUS_QUEUE_NAME");
+            var queueName = Configuration.GetValue<string>("SERVICEBUS_QUEUE_NAME");
             var messageProcessor = CreateServiceBusProcessor(queueName);
             messageProcessor.ProcessMessageAsync += HandleMessageAsync;
             messageProcessor.ProcessErrorAsync += HandleReceivedExceptionAsync;
@@ -45,7 +46,7 @@ public abstract class QueueWorker<TMessage> : BackgroundService
 
         private ServiceBusClient AuthenticateToAzureServiceBus()
         {
-            var authenticationMode = Configuration.GetValue<AuthenticationMode>("KEDA_SERVICEBUS_AUTH_MODE");
+            var authenticationMode = Configuration.GetValue<AuthenticationMode>("SERVICEBUS_AUTH_MODE");
             
             ServiceBusClient serviceBusClient;
 
