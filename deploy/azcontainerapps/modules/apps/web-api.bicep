@@ -17,15 +17,15 @@ param serviceBusConnectionString string
 
 
 resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
-  name: 'weatherforecast-api'
+  name: 'ordering-webapi'
   location: location
   properties: {
     managedEnvironmentId: containerAppsEnvironmentId
     template: {
       containers: [
         {
-          name: 'v2022-11-15'
-          image: 'aknagar/v2022-11-15:1.0.0'
+          name: 'ordering-webapi'
+          image: 'aknagar/ordering-webapi:1.0.0'
           resources: {
             cpu: json('0.5')
             memory: '1.0Gi'

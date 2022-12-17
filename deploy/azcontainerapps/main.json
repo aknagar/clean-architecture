@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.13.1.58284",
-      "templateHash": "16745870588106953841"
+      "templateHash": "3968206505888406621"
     }
   },
   "parameters": {
@@ -296,7 +296,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.13.1.58284",
-              "templateHash": "17673597808295405549"
+              "templateHash": "2903865009306261177"
             }
           },
           "parameters": {
@@ -317,15 +317,15 @@
             {
               "type": "Microsoft.App/containerApps",
               "apiVersion": "2022-06-01-preview",
-              "name": "weatherforecast-api",
+              "name": "ordering-webapi",
               "location": "[parameters('location')]",
               "properties": {
                 "managedEnvironmentId": "[parameters('containerAppsEnvironmentId')]",
                 "template": {
                   "containers": [
                     {
-                      "name": "v2022-11-15",
-                      "image": "aknagar/v2022-11-15:1.0.0",
+                      "name": "ordering-webapi",
+                      "image": "aknagar/ordering-webapi:1.0.0",
                       "resources": {
                         "cpu": "[json('0.5')]",
                         "memory": "1.0Gi"

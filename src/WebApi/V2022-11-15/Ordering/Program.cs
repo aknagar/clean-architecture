@@ -1,5 +1,5 @@
 using Serilog;
-using Utilities;
+using Utilities.AzureKeyVault;
 
 // https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-7.0
 

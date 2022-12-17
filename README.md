@@ -61,13 +61,17 @@ https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/loggermessage
 https://devblogs.microsoft.com/dotnet/announcing-builtin-container-support-for-the-dotnet-sdk/
 https://learn.microsoft.com/en-us/dotnet/core/docker/publish-as-container
 
+### Dotnet Web api image
 dotnet add package Microsoft.NET.Build.Containers
 
 --create container image using dotnet sdk.
 dotnet publish --os linux --arch x64 -c Release -p:PublishProfile=DefaultContainer
+docker images
+docker image tag 2804dd3337bd aknagar/ordering-webapi:1.0.0
+docker push aknagar/ordering-webapi:1.0.0
 
 # run your app using the new container
-docker run -it --rm -p 5010:80 v2022-11-15:1.0.0
+docker run -it --rm -p 5010:80 ordering-webapi:1.0.0
 
 https://learn.microsoft.com/en-us/dotnet/core/docker/publish-as-container
 

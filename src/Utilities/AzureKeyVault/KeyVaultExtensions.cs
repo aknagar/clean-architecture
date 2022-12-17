@@ -5,7 +5,7 @@ using Azure.Security.KeyVault.Secrets;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace Utilities;
+namespace Utilities.AzureKeyVault;
 
 // https://github.com/Supertext/Supertext.Base/blob/develop/Supertext.Base.Security/Configuration/KeyVaultExtensions.cs
 public static class KeyVaultExtensions
@@ -32,11 +32,13 @@ public static class KeyVaultExtensions
     {
         return hostBuilder.ConfigureAppConfiguration((context, config) =>
                                                      {
+                                                        /*
                                                          if (context.HostingEnvironment.IsDevelopment())
                                                          {
                                                              config.AddUserSecrets<TStartup>();
                                                              return;
                                                          }
+                                                         */
                                                          config.ConfigureConfigWithKeyVaultSecrets();
                                                      });
     }

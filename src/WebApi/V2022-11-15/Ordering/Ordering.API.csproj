@@ -5,7 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Ordering.Api</RootNamespace>
-    <UserSecretsId>6356311d-aac5-4442-8cce-f7c57951c224</UserSecretsId>    
+    <UserSecretsId>6356311d-aac5-4442-8cce-f7c57951c224</UserSecretsId>
+    <ContainerImageName>ordering-webapi</ContainerImageName>  
   </PropertyGroup>
 
   <ItemGroup>
