@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.13.1.58284",
-      "templateHash": "10702005212385285276"
+      "templateHash": "16745870588106953841"
     }
   },
   "parameters": {
@@ -20,7 +20,9 @@
   },
   "variables": {
     "serviceBusName": "sb11-dev",
-    "queueName": "[format('{0}/orders', variables('serviceBusName'))]",
+    "queueName": "orders",
+    "serviceBusQueueName": "[format('{0}/{1}', variables('serviceBusName'), variables('queueName'))]",
+    "policyName": "testsaspolicy",
     "containerAppsEnvName": "containerappenv-utob7veruf5g4"
   },
   "resources": [
@@ -284,7 +286,7 @@
             "value": "[reference(resourceId('Microsoft.App/managedEnvironments', variables('containerAppsEnvName')), '2022-06-01-preview').defaultDomain]"
           },
           "serviceBusConnectionString": {
-            "value": "[format('Endpoint=sb://{0}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey={1}', variables('queueName'), listKeys(format('{0}/AuthorizationRules/testsaspolicy', resourceId('Microsoft.ServiceBus/namespaces/queues', split(variables('queueName'), '/')[0], split(variables('queueName'), '/')[1])), '2022-01-01-preview').primaryKey)]"
+            "value": "[format('Endpoint=sb://{0}.servicebus.windows.net/;SharedAccessKeyName={1};SharedAccessKey={2}', variables('serviceBusName'), variables('policyName'), listKeys(format('{0}/AuthorizationRules/{1}', resourceId('Microsoft.ServiceBus/namespaces/queues', split(variables('serviceBusQueueName'), '/')[0], split(variables('serviceBusQueueName'), '/')[1]), variables('policyName')), '2022-01-01-preview').primaryKey)]"
           }
         },
         "template": {
@@ -406,7 +408,7 @@
             "value": "[reference(resourceId('Microsoft.App/managedEnvironments', variables('containerAppsEnvName')), '2022-06-01-preview').defaultDomain]"
           },
           "serviceBusConnectionString": {
-            "value": "[format('Endpoint=sb://{0}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey={1}', variables('queueName'), listKeys(format('{0}/AuthorizationRules/testsaspolicy', resourceId('Microsoft.ServiceBus/namespaces/queues', split(variables('queueName'), '/')[0], split(variables('queueName'), '/')[1])), '2022-01-01-preview').primaryKey)]"
+            "value": "[format('Endpoint=sb://{0}.servicebus.windows.net/;SharedAccessKeyName={1};SharedAccessKey={2};EntityPath={3}', variables('serviceBusName'), variables('policyName'), listKeys(format('{0}/AuthorizationRules/{1}', resourceId('Microsoft.ServiceBus/namespaces/queues', split(variables('serviceBusQueueName'), '/')[0], split(variables('serviceBusQueueName'), '/')[1]), variables('policyName')), '2022-01-01-preview').primaryKey, variables('queueName'))]"
           }
         },
         "template": {
@@ -416,7 +418,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.13.1.58284",
-              "templateHash": "15566254817674248825"
+              "templateHash": "11197749926586179863"
             }
           },
           "parameters": {
@@ -474,6 +476,10 @@
                         {
                           "name": "SERVICEBUS_QUEUE_NAME",
                           "value": "orders"
+                        },
+                        {
+                          "name": "SERVICEBUS_QUEUE_CONNECTIONSTRING",
+                          "secretRef": "service-bus-connection-string"
                         }
                       ]
                     }
@@ -484,17 +490,6 @@
                   }
                 },
                 "configuration": {
-                  "ingress": {
-                    "external": true,
-                    "targetPort": 80,
-                    "allowInsecure": false,
-                    "traffic": [
-                      {
-                        "latestRevision": true,
-                        "weight": 100
-                      }
-                    ]
-                  },
                   "secrets": [
                     {
                       "name": "service-bus-connection-string",

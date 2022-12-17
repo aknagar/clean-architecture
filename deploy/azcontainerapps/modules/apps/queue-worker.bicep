@@ -55,6 +55,10 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
               name: 'SERVICEBUS_QUEUE_NAME'
               value: 'orders'
             }
+            {
+              name: 'SERVICEBUS_QUEUE_CONNECTIONSTRING'
+              secretRef: 'service-bus-connection-string'
+            }
             /*
             {
               name: 'SeqServerUrl'
@@ -69,18 +73,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
         maxReplicas: 1
       }
     }
-    configuration: {
-      ingress: {
-        external: true
-        targetPort: 80
-        allowInsecure: false
-        traffic: [
-          {
-            latestRevision: true
-            weight: 100
-          }
-        ]
-      }
+    configuration: {      
       secrets: [        
         {
           name: 'service-bus-connection-string'

@@ -35,9 +35,11 @@ module containerAppsEnvironment 'modules/infra/container-apps-env.bicep' = {
 // Container apps
 ////////////////////////////////////////////////////////////////////////////////
 
-var queueName = '${serviceBusName}/orders'
+var queueName = 'orders'
+var serviceBusQueueName = '${serviceBusName}/${queueName}'
+var policyName = 'testsaspolicy'
 resource serviceBusQueue 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-preview' existing = {
-  name: queueName  
+  name: serviceBusQueueName  
 }
 
 var containerAppsEnvName = 'containerappenv-utob7veruf5g4'
@@ -54,7 +56,7 @@ module webApi 'modules/apps/web-api.bicep' = {
     location: location
     containerAppsEnvironmentId: containerAppsEnv.id    
     containerAppsEnvironmentDomain: containerAppsEnv.properties.defaultDomain
-    serviceBusConnectionString: 'Endpoint=sb://${serviceBusQueue.name}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/testsaspolicy', serviceBusQueue.apiVersion).primaryKey}' 
+    serviceBusConnectionString: 'Endpoint=sb://${serviceBusName}.servicebus.windows.net/;SharedAccessKeyName=${policyName};SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/${policyName}', serviceBusQueue.apiVersion).primaryKey}' 
   }
 }
 
@@ -68,6 +70,6 @@ module queueWorker 'modules/apps/queue-worker.bicep' = {
     location: location
     containerAppsEnvironmentId: containerAppsEnv.id    
     containerAppsEnvironmentDomain: containerAppsEnv.properties.defaultDomain
-    serviceBusConnectionString: 'Endpoint=sb://${serviceBusQueue.name}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/testsaspolicy', serviceBusQueue.apiVersion).primaryKey}' 
+    serviceBusConnectionString: 'Endpoint=sb://${serviceBusName}.servicebus.windows.net/;SharedAccessKeyName=${policyName};SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/${policyName}', serviceBusQueue.apiVersion).primaryKey};EntityPath=${queueName}' 
   }
 }
