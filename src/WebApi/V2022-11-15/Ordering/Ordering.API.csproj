@@ -4,7 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>V2022_11_15</RootNamespace>
+    <RootNamespace>Ordering.Api</RootNamespace>
     <UserSecretsId>6356311d-aac5-4442-8cce-f7c57951c224</UserSecretsId>    
   </PropertyGroup>
 
@@ -13,10 +13,14 @@
     <PackageReference Include="Microsoft.NET.Build.Containers" Version="0.2.7" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.11.1" />
+    <PackageReference Include="Bogus" Version="34.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\..\..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\..\..\Contracts\Contracts.csproj" /> 
+    <ProjectReference Include="..\..\..\Domain\Domain.csproj" />    
   </ItemGroup>
 
   <ItemGroup>

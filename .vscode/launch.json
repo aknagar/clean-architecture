@@ -5,13 +5,13 @@
     "version": "0.2.0",
     "configurations": [    
         {
-            "name": ".NET Core Launch (api)",
+            "name": ".NET Core Launch (ordering-api)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build-sln",
-            "program": "${workspaceFolder}/src/WebApi/V2022-11-15/bin/Debug/net7.0/V2022-11-15.dll",
+            "preLaunchTask": "build-sln", 
+            "program": "${workspaceFolder}/src/WebApi/V2022-11-15/Ordering/bin/Debug/net7.0/Ordering.API.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/src/WebApi/V2022-11-15",
+            "cwd": "${workspaceFolder}/src/WebApi/V2022-11-15/Ordering",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",

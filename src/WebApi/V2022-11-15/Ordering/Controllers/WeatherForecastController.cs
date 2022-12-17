@@ -1,6 +1,5 @@
+using clean_architecture.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-
-namespace V2022_11_15.Controllers;
 
 /// https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-7.0
 /// [ApiController] enables opinionated behaviors that make it easier to build web APIs. 
@@ -18,9 +17,11 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IConfiguration _configuration;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(IConfiguration configuration, ILogger<WeatherForecastController> logger)
     {
+        _configuration = configuration;
         _logger = logger;
     }
 

@@ -1,4 +1,4 @@
-namespace V2022_11_15;
+namespace clean_architecture.Domain.Entities;
 
 public class WeatherForecast
 {
