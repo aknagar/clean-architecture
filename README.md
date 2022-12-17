@@ -79,6 +79,7 @@ Type add dev container
 ## Bicep
 https://dandoescode.com/blog/bicep-part-two/
 https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/azure-resource-manager/bicep/best-practices.md 
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/troubleshooting/quickstart-troubleshoot-bicep-deployment?tabs=azure-cli 
 https://ochzhen.com/blog/locks-in-azure-bicep
 https://www.thorsten-hans.com/how-to-deploy-azure-container-apps-with-bicep/
 https://bicepdemo.z22.web.core.windows.net/ 
@@ -95,3 +96,15 @@ https://www.meziantou.net/monitoring-a-dotnet-application-using-opentelemetry.ht
 https://blog.datalust.co/using-serilog-in-net-6/
 
 
+https://freecontent.manning.com/components-of-an-orchestrator/#:~:text=The%20components%20of%20an%20orchestration%20system.%20Regardless%20of,All%20orchestration%20systems%20share%20these%20same%20basic%20components.
+
+
+Concepts
+Task = end user's task
+Service=Manager
+Worker=Processor
+    Operation=Workflow=Orchestration (Operation an organized plan involving number of activities. think activity diagram)
+    Activities = compose of steps
+    Steps=can happen only serially
+Scheduler
+Persistence

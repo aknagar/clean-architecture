@@ -37,23 +37,23 @@ module containerAppsEnvironment 'infra/container-apps-env.bicep' = {
 
 var queueName = '${serviceBusName}/orders'
 resource serviceBusQueue 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-preview' existing = {
-  name: queueName
+  name: queueName  
 }
 
-var containerAppsEnvName = '${deployment().name}-infra-container-app-env'
+var containerAppsEnvName = 'containerappenv-utob7veruf5g4'
 resource containerAppsEnv 'Microsoft.App/managedEnvironments@2022-06-01-preview' existing = {
   name: containerAppsEnvName
 }
 module webApi 'modules/apps/web-api.bicep' = {
   name: '${deployment().name}-app-web-api'
   dependsOn: [
-    containerAppsEnvironment
+    containerAppsEnv
     serviceBusQueue
   ]
   params: {
     location: location
     containerAppsEnvironmentId: containerAppsEnv.id    
     containerAppsEnvironmentDomain: containerAppsEnv.properties.defaultDomain
-    serviceBusConnectionString: 'Endpoint=sb://${serviceBusQueue.name}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusQueue.apiVersion).primaryKey}' 
+    serviceBusConnectionString: 'Endpoint=sb://${serviceBusQueue.name}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/testsaspolicy', serviceBusQueue.apiVersion).primaryKey}' 
   }
 }

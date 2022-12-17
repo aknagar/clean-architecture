@@ -21,7 +21,7 @@ resource ordersTopic 'Microsoft.ServiceBus/namespaces/topics@2021-06-01-preview'
 */
 resource ordersQueue 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-preview' = {
   name: 'orders'
-  parent: servicebus
+  parent: servicebus  
   properties: {
     defaultMessageTimeToLive: 'P6M' //ISO 8601
     status: 'Active'
