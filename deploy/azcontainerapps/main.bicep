@@ -57,3 +57,17 @@ module webApi 'modules/apps/web-api.bicep' = {
     serviceBusConnectionString: 'Endpoint=sb://${serviceBusQueue.name}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/testsaspolicy', serviceBusQueue.apiVersion).primaryKey}' 
   }
 }
+
+module queueWorker 'modules/apps/queue-worker.bicep' = {
+  name: '${deployment().name}-queue-worker'
+  dependsOn: [
+    containerAppsEnv
+    serviceBusQueue
+  ]
+  params: {
+    location: location
+    containerAppsEnvironmentId: containerAppsEnv.id    
+    containerAppsEnvironmentDomain: containerAppsEnv.properties.defaultDomain
+    serviceBusConnectionString: 'Endpoint=sb://${serviceBusQueue.name}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/testsaspolicy', serviceBusQueue.apiVersion).primaryKey}' 
+  }
+}

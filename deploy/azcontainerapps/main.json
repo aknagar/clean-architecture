@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.13.1.58284",
-      "templateHash": "11620758364522305953"
+      "templateHash": "10702005212385285276"
     }
   },
   "parameters": {
@@ -324,6 +324,128 @@
                     {
                       "name": "v2022-11-15",
                       "image": "aknagar/v2022-11-15:1.0.0",
+                      "resources": {
+                        "cpu": "[json('0.5')]",
+                        "memory": "1.0Gi"
+                      },
+                      "env": [
+                        {
+                          "name": "ASPNETCORE_ENVIRONMENT",
+                          "value": "Development"
+                        },
+                        {
+                          "name": "ASPNETCORE_URLS",
+                          "value": "http://0.0.0.0:80"
+                        },
+                        {
+                          "name": "IdentityUrl",
+                          "value": "[format('https://identity-api.{0}', parameters('containerAppsEnvironmentDomain'))]"
+                        },
+                        {
+                          "name": "IdentityUrlExternal",
+                          "value": "[format('https://identity-api.{0}', parameters('containerAppsEnvironmentDomain'))]"
+                        },
+                        {
+                          "name": "SERVICEBUS_AUTH_MODE",
+                          "value": "ConnectionString"
+                        },
+                        {
+                          "name": "SERVICEBUS_QUEUE_NAME",
+                          "value": "orders"
+                        }
+                      ]
+                    }
+                  ],
+                  "scale": {
+                    "minReplicas": 1,
+                    "maxReplicas": 1
+                  }
+                },
+                "configuration": {
+                  "ingress": {
+                    "external": true,
+                    "targetPort": 80,
+                    "allowInsecure": false,
+                    "traffic": [
+                      {
+                        "latestRevision": true,
+                        "weight": 100
+                      }
+                    ]
+                  },
+                  "secrets": [
+                    {
+                      "name": "service-bus-connection-string",
+                      "value": "[parameters('serviceBusConnectionString')]"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[format('{0}-queue-worker', deployment().name)]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "containerAppsEnvironmentId": {
+            "value": "[resourceId('Microsoft.App/managedEnvironments', variables('containerAppsEnvName'))]"
+          },
+          "containerAppsEnvironmentDomain": {
+            "value": "[reference(resourceId('Microsoft.App/managedEnvironments', variables('containerAppsEnvName')), '2022-06-01-preview').defaultDomain]"
+          },
+          "serviceBusConnectionString": {
+            "value": "[format('Endpoint=sb://{0}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey={1}', variables('queueName'), listKeys(format('{0}/AuthorizationRules/testsaspolicy', resourceId('Microsoft.ServiceBus/namespaces/queues', split(variables('queueName'), '/')[0], split(variables('queueName'), '/')[1])), '2022-01-01-preview').primaryKey)]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.13.1.58284",
+              "templateHash": "15566254817674248825"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string"
+            },
+            "containerAppsEnvironmentId": {
+              "type": "string"
+            },
+            "containerAppsEnvironmentDomain": {
+              "type": "string"
+            },
+            "serviceBusConnectionString": {
+              "type": "secureString"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.App/containerApps",
+              "apiVersion": "2022-06-01-preview",
+              "name": "queue-worker",
+              "location": "[parameters('location')]",
+              "properties": {
+                "managedEnvironmentId": "[parameters('containerAppsEnvironmentId')]",
+                "template": {
+                  "containers": [
+                    {
+                      "name": "dotnet-queue-worker",
+                      "image": "aknagar/dotnet-queue-worker:1.0.0",
                       "resources": {
                         "cpu": "[json('0.5')]",
                         "memory": "1.0Gi"

@@ -59,6 +59,7 @@ https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/loggermessage
 ## Docker Containers
 
 https://devblogs.microsoft.com/dotnet/announcing-builtin-container-support-for-the-dotnet-sdk/
+https://learn.microsoft.com/en-us/dotnet/core/docker/publish-as-container
 
 dotnet add package Microsoft.NET.Build.Containers
 
@@ -75,6 +76,23 @@ https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md
 Press F1 to open the Command Palette.
 Type add dev container
 
+### Dotnet Worker image
+https://learn.microsoft.com/en-us/dotnet/core/docker/publish-as-container
+
+dotnet add package Microsoft.NET.Build.Containers
+dotnet publish --os linux --arch x64 /t:PublishContainer -c Release
+
+### publish to docker hub
+docker login
+docker image tag 17119212f015 aknagar/dotnet-queue-worker:1.0.0
+docker push aknagar/dotnet-queue-worker:1.0.0
+
+An image does not exist locally with the tag: aknagar/dotnet-queue-worker
+
+
+the /t:PublishContainer argument is only required for non-web .NET apps, such as console and worker templates.
+
+For web templates, replace the /t:PublishContainer argument with -p:PublishProfile=DefaultContainer
 
 ## Bicep
 https://dandoescode.com/blog/bicep-part-two/
@@ -90,6 +108,7 @@ Bicep files are idempotent, which means you can deploy the same file many times 
 https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/file
 az bicep build --file .\main.bicep
 
+az deployment group create --resource-group caRG --template-file main.bicep --mode Incremental --verbose
 
 ## Logging - Opentelemetry
 https://www.meziantou.net/monitoring-a-dotnet-application-using-opentelemetry.htm
