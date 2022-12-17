@@ -3,7 +3,7 @@ using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Utilities;
+namespace Utilities.AzureServiceBus;
 
 public static class ServiceBusClientFactory
 {

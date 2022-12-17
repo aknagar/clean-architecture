@@ -6,6 +6,8 @@ public static partial class MiddlewareInitializer
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
+
+            // https://localhost:<port>/swagger
             app.UseSwaggerUI();
         }
 

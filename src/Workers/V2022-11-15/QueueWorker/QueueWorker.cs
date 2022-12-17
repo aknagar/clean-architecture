@@ -1,7 +1,7 @@
 using Azure.Messaging.ServiceBus;
 using Newtonsoft.Json;
 using System.Text;
-using Utilities;
+using Utilities.AzureServiceBus;
 
 namespace QueueWorker;
 

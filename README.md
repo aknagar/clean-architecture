@@ -132,6 +132,16 @@ Worker=Processor
 Scheduler
 Persistence
 
+### Azure KeyVault
+
+If you have nested values in the appsettings file, your secret name in the key vault has to match it. But you have to replace the ":" character with "--". That means your secret name has to be of the form:
+
+KeyVault--Secrets--Secret1
+NOT
+KeyVault:Secrets:Secret1
+
+az keyvault secret set --vault-name cakv-dev --name "ConnectionStrings--ServiceBus" --value "<your-connectionstring>"
+
 ### TODO
 Implement Options pattern for configuration
 Open telemetry
