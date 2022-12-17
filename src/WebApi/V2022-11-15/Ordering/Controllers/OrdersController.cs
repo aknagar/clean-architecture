@@ -55,7 +55,7 @@ public class OrdersController : ControllerBase
 
         if (Guid.TryParse(requestId, out Guid guid) && guid != Guid.Empty)
         {
-            var ConnectionString = _configuration["SERVICEBUS_QUEUE_CONNECTIONSTRING"];
+            var ConnectionString = _configuration["ServiceBusConnectionString"];
             await QueueOrders(orderAmount, ConnectionString);
         }
 

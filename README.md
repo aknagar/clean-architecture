@@ -131,3 +131,7 @@ Worker=Processor
     Steps=can happen only serially
 Scheduler
 Persistence
+
+### TODO
+Implement Options pattern for configuration
+Open telemetry
