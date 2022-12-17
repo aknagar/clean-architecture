@@ -6,7 +6,7 @@ param uniqueSeed string = '${resourceGroup().id}-${deployment().name}'  // examp
 ////////////////////////////////////////////////////////////////////////////////
 
 var serviceBusName = 'sb11-dev'
-module keyvault 'infra/keyvault.bicep' = {
+module keyvault 'modules/infra/keyvault.bicep' = {
   name: '${deployment().name}-infra-keyvault'
   params: {
     vaultName: 'cakv-dev'
@@ -15,7 +15,7 @@ module keyvault 'infra/keyvault.bicep' = {
   }
 }
 
-module serviceBus 'infra/servicebus.bicep' = {
+module serviceBus 'modules/infra/servicebus.bicep' = {
   name: '${deployment().name}-infra-servicebus'
   params: {
     name: serviceBusName
@@ -23,7 +23,7 @@ module serviceBus 'infra/servicebus.bicep' = {
   }
 }
 
-module containerAppsEnvironment 'infra/container-apps-env.bicep' = {
+module containerAppsEnvironment 'modules/infra/container-apps-env.bicep' = {
   name: '${deployment().name}-infra-container-app-env'
   params: {
     location: location
