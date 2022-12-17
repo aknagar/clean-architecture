@@ -25,9 +25,6 @@ Unifies Startup.cs and Program.cs into a single Program.cs file.
 https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10
 
 
-## Logging
-https://blog.datalust.co/using-serilog-in-net-6/
-
 ### Difference b/w WebHost and Host in Program.cs
 https://stackoverflow.com/questions/59745401/what-is-the-difference-between-host-and-webhost-class-in-asp-net-core
 
@@ -80,7 +77,21 @@ Type add dev container
 
 
 ## Bicep
+https://dandoescode.com/blog/bicep-part-two/
+https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/azure-resource-manager/bicep/best-practices.md 
 https://ochzhen.com/blog/locks-in-azure-bicep
 https://www.thorsten-hans.com/how-to-deploy-azure-container-apps-with-bicep/
 https://bicepdemo.z22.web.core.windows.net/ 
+
+Bicep is a declarative language, which means the elements can appear in any order
 Bicep files are idempotent, which means you can deploy the same file many times and get the same resource types in the same state. You can develop one file that represents the desired state,
+
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/file
+az bicep build --file .\main.bicep
+
+
+## Logging - Opentelemetry
+https://www.meziantou.net/monitoring-a-dotnet-application-using-opentelemetry.htm
+https://blog.datalust.co/using-serilog-in-net-6/
+
+

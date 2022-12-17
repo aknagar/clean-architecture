@@ -5,6 +5,7 @@ param uniqueSeed string = '${resourceGroup().id}-${deployment().name}'  // examp
 // Infrastructure
 ////////////////////////////////////////////////////////////////////////////////
 
+var serviceBusName = 'sb11-dev'
 module keyvault 'infra/keyvault.bicep' = {
   name: '${deployment().name}-infra-keyvault'
   params: {
@@ -17,7 +18,7 @@ module keyvault 'infra/keyvault.bicep' = {
 module serviceBus 'infra/servicebus.bicep' = {
   name: '${deployment().name}-infra-servicebus'
   params: {
-    name: 'sb11-dev'
+    name: serviceBusName
     location: location
   }
 }
@@ -34,16 +35,25 @@ module containerAppsEnvironment 'infra/container-apps-env.bicep' = {
 // Container apps
 ////////////////////////////////////////////////////////////////////////////////
 
+var queueName = '${serviceBusName}/orders'
+resource serviceBusQueue 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-preview' existing = {
+  name: queueName
+}
+
+var containerAppsEnvName = '${deployment().name}-infra-container-app-env'
+resource containerAppsEnv 'Microsoft.App/managedEnvironments@2022-06-01-preview' existing = {
+  name: containerAppsEnvName
+}
 module webApi 'modules/apps/web-api.bicep' = {
   name: '${deployment().name}-app-web-api'
   dependsOn: [
     containerAppsEnvironment
+    serviceBusQueue
   ]
   params: {
     location: location
-    //serviceBusConnectionString: 'Endpoint=sb://${serviceBusRef.name}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=${listKeys('${serviceBusRef.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusRef.apiVersion).primaryKey}'
-    //serviceBusConnectionString: 'Endpoint=sb://xyz.servicebus.windows.net/'
-    containerAppsEnvironmentId: containerAppsEnvironment.outputs.containerAppsEnvironmentId    
-    containerAppsEnvironmentDomain: containerAppsEnvironment.outputs.containerAppsEnvironmentDomain
+    containerAppsEnvironmentId: containerAppsEnv.id    
+    containerAppsEnvironmentDomain: containerAppsEnv.properties.defaultDomain
+    serviceBusConnectionString: 'Endpoint=sb://${serviceBusQueue.name}.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusQueue.apiVersion).primaryKey}' 
   }
 }

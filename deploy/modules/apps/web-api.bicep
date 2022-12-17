@@ -12,9 +12,9 @@ param cosmosUrl string
 param cosmosKey string
 */
 
-/*@secure()
+@secure()
 param serviceBusConnectionString string
-*/
+
 
 resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
   name: 'weatherforecast-api'
@@ -47,6 +47,14 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
               name: 'IdentityUrlExternal'
               value: 'https://identity-api.${containerAppsEnvironmentDomain}'
             }
+            {
+              name: 'SERVICEBUS_AUTH_MODE'
+              value: 'ConnectionString'
+            }
+            {
+              name: 'SERVICEBUS_QUEUE_NAME'
+              value: 'orders'
+            }
             /*
             {
               name: 'SeqServerUrl'
@@ -73,14 +81,12 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
           }
         ]
       }
-      /*
       secrets: [        
         {
           name: 'service-bus-connection-string'
           value: serviceBusConnectionString
         }
       ]
-      */
     }
   }
 }
