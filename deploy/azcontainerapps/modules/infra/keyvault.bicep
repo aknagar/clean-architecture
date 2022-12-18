@@ -11,7 +11,7 @@ resource vault 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     enableSoftDelete: false
     enabledForDeployment: false
     enabledForDiskEncryption: false
-    enabledForTemplateDeployment: false
+    enabledForTemplateDeployment: true
     tenantId: subscription().tenantId
     sku: {
       name: skuName

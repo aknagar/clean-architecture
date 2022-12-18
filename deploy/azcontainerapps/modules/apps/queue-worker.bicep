@@ -1,20 +1,11 @@
-param location string
 // param seqFqdn string
 
 param containerAppsEnvironmentId string
 param containerAppsEnvironmentDomain string
-
-/*
-param cosmosDbName string
-param cosmosCollectionName string
-param cosmosUrl string
-@secure()
-param cosmosKey string
-*/
+param location string = resourceGroup().location
 
 @secure()
 param serviceBusConnectionString string
-
 
 resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
   name: 'queue-worker'

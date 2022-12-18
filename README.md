@@ -93,7 +93,6 @@ docker push aknagar/dotnet-queue-worker:1.0.0
 
 An image does not exist locally with the tag: aknagar/dotnet-queue-worker
 
-
 the /t:PublishContainer argument is only required for non-web .NET apps, such as console and worker templates.
 
 For web templates, replace the /t:PublishContainer argument with -p:PublishProfile=DefaultContainer

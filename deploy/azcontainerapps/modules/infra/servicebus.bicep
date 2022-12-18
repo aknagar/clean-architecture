@@ -28,9 +28,21 @@ resource ordersQueue 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-preview'
   }
 }
 
-resource AuthorizationRule 'Microsoft.ServiceBus/namespaces/AuthorizationRules@2022-01-01-preview' = {
+resource RootManageSharedAccessKeyRule 'Microsoft.ServiceBus/namespaces/AuthorizationRules@2022-01-01-preview' = {
   name: 'RootManageSharedAccessKey'
   parent: servicebus
+  properties: {
+    rights: [
+      'Listen'
+      'Manage'
+      'Send'
+    ]
+  }
+}
+
+resource QueueManageSharedAccessKeyRule 'Microsoft.ServiceBus/namespaces/queues/authorizationRules@2022-01-01-preview' = {
+  name: 'QueueManageSharedAccessKey'
+  parent: ordersQueue
   properties: {
     rights: [
       'Listen'
