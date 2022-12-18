@@ -25,7 +25,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
       containers: [
         {
           name: 'ordering-webapi'
-          image: 'aknagar/ordering-webapi:1.0.0'
+          image: 'aknagar/ordering-webapi:1.0.1'
           resources: {
             cpu: json('0.5')
             memory: '1.0Gi'

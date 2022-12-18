@@ -25,6 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+   <!--ContainerPort sets ExposedPorts in container. Exposed port is the port which host will be listening to.-->
+   <ContainerPort Include="5011" Type="tcp" />
    <ContainerEnvironmentVariable Include="TenantId" Value="31b21488-eb5e-4422-a181-1b15dd378dc8" />
    <ContainerEnvironmentVariable Include="AzureADApplicationId" Value="ddebc170-1800-44ae-85aa-754271bd58f1" />
   </ItemGroup>

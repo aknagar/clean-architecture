@@ -85,6 +85,7 @@ https://learn.microsoft.com/en-us/dotnet/core/docker/publish-as-container
 
 dotnet add package Microsoft.NET.Build.Containers
 dotnet publish --os linux --arch x64 /t:PublishContainer -c Release
+docker run -it --rm -p 5010:80 ordering-webapi:1.0.0
 
 ### publish to docker hub
 docker login
