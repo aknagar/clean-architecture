@@ -1,38 +1,11 @@
 param location string = resourceGroup().location
-param uniqueSeed string = '${resourceGroup().id}-${deployment().name}'  // example utob7veruf5g4
 
-var tenantId = '31b21488-eb5e-4422-a181-1b15dd378dc8'
-var serviceBusName = 'sb11-dev'
-var keyvaultName = 'cakv-dev'
 var spnObjectId = '474af495-7e5d-4841-a171-01a4ee85a5b4'
+var serviceBusName = 'sb-dev-11'
+var keyvaultName = 'cakv-dev-11'
+var containerAppsEnvironmentName = 'containerappenv-dev-11'
 
-////////////////////////////////////////////////////////////////////////////////
-// Infrastructure
-////////////////////////////////////////////////////////////////////////////////
-
-module keyvault 'modules/infra/keyvault.bicep' = {
-  name: '${deployment().name}-infra-keyvault'
-  params: {
-    vaultName: keyvaultName
-    location: location    
-  }
-}
-
-module serviceBus 'modules/infra/servicebus.bicep' = {
-  name: '${deployment().name}-infra-servicebus'
-  params: {
-    name: serviceBusName
-    location: location
-  }
-}
-
-module containerAppsEnvironment 'modules/infra/container-apps-env.bicep' = {
-  name: '${deployment().name}-infra-container-app-env'
-  params: {
-    location: location
-    uniqueSeed: uniqueSeed
-  }
-}
+var tenantId = subscription().tenantId
 
 ////////////////////////////////////////////////////////////////////////////////
 // Container apps
@@ -45,9 +18,8 @@ resource serviceBusQueue 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-prev
   name: serviceBusQueueName  
 }
 
-var containerAppsEnvName = 'containerappenv-utob7veruf5g4'
 resource containerAppsEnv 'Microsoft.App/managedEnvironments@2022-06-01-preview' existing = {
-  name: containerAppsEnvName
+  name: containerAppsEnvironmentName
 }
 module webApi 'modules/apps/web-api.bicep' = {
   name: '${deployment().name}-app-web-api'

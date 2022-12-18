@@ -28,6 +28,18 @@ resource ordersQueue 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-preview'
   }
 }
 
+resource AuthorizationRule 'Microsoft.ServiceBus/namespaces/AuthorizationRules@2022-01-01-preview' = {
+  name: 'RootManageSharedAccessKey'
+  parent: servicebus
+  properties: {
+    rights: [
+      'Listen'
+      'Manage'
+      'Send'
+    ]
+  }
+}
+
 output servicebusId string = servicebus.id
 output servicebusName string = servicebus.name
 output apiVersion string = servicebus.apiVersion

@@ -7,7 +7,10 @@ az login
 az account list
 
 # create resource group
-az group create --name caRG --location eastus
+az group create --name rg-ca-dev --location eastus
+
+## Create a deployment at resource group from a local template file, using parameters from an array string.
+az deployment group create --resource-group rg-ca-dev --template-file modules/infra/infra-deploy.bicep --mode Incremental --verbose
 
 # Create a deployment at resource group from a local template file, using parameters from an array string.
-az deployment group create --resource-group caRG --template-file main.bicep --mode Incremental --verbose
+az deployment group create --resource-group rg-ca-dev --template-file main.bicep --mode Incremental --verbose
