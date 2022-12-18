@@ -29,14 +29,6 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
             {
               name: 'ASPNETCORE_URLS'
               value: 'http://0.0.0.0:80'
-            }            
-            {
-              name: 'IdentityUrl'
-              value: 'https://identity-api.${containerAppsEnvironmentDomain}'
-            }  
-            {
-              name: 'IdentityUrlExternal'
-              value: 'https://identity-api.${containerAppsEnvironmentDomain}'
             }
             {
               name: 'SERVICEBUS_AUTH_MODE'
@@ -50,12 +42,6 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
               name: 'SERVICEBUS_QUEUE_CONNECTIONSTRING'
               secretRef: 'service-bus-connection-string'
             }
-            /*
-            {
-              name: 'SeqServerUrl'
-              value: 'https://${seqFqdn}'
-            }
-            */
           ]
         }
       ]

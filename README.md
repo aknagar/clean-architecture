@@ -158,7 +158,7 @@ Open telemetry
 
 
 ### KeyVault
-If we create an SPN and try to read secret from the KeyVault, clientSecret of the SPN gets exposed on web server.
+If we create an SPN and try to read secret from the KeyVault, clientSecret of the SPN gets exposed on in the code.
 
 Stop using client secrets and certificates, start using Managed Identities
 
@@ -166,3 +166,8 @@ Managed Identity:
     System assigned managed identity
     User assigned managed identity
 https://learn.microsoft.com/en-us/azure/container-apps/managed-identity?tabs=portal%2Cdotnet#common-use-cases
+
+MI can be used without storing credentials in code
+
+### App Service deployment via bicep
+https://larry.claman.net/post/2021-08-19-21-bicep-uami/
