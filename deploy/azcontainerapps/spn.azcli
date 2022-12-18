@@ -2,3 +2,6 @@
 az ad sp list --display-name 'CleanArchitecturePlay'
 
 # how to retrieve json attribute from response using cli
+$spnName="CleanArchitecturePlay"
+$spnObjectId=$(az ad sp list --display-name $spnName --query '[].objectId' --output tsv)
+$spnObjectId

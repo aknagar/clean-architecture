@@ -1,17 +1,20 @@
 param location string = resourceGroup().location
 param uniqueSeed string = '${resourceGroup().id}-${deployment().name}'  // example utob7veruf5g4
 
+var tenantId = '31b21488-eb5e-4422-a181-1b15dd378dc8'
+var serviceBusName = 'sb11-dev'
+var keyvaultName = 'cakv-dev'
+var spnObjectId = '474af495-7e5d-4841-a171-01a4ee85a5b4'
+
 ////////////////////////////////////////////////////////////////////////////////
 // Infrastructure
 ////////////////////////////////////////////////////////////////////////////////
 
-var serviceBusName = 'sb11-dev'
 module keyvault 'modules/infra/keyvault.bicep' = {
   name: '${deployment().name}-infra-keyvault'
   params: {
-    vaultName: 'cakv-dev'
-    location: location
-    
+    vaultName: keyvaultName
+    location: location    
   }
 }
 
@@ -71,5 +74,17 @@ module queueWorker 'modules/apps/queue-worker.bicep' = {
     containerAppsEnvironmentId: containerAppsEnv.id    
     containerAppsEnvironmentDomain: containerAppsEnv.properties.defaultDomain
     serviceBusConnectionString: 'Endpoint=sb://${serviceBusName}.servicebus.windows.net/;SharedAccessKeyName=${policyName};SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/${policyName}', serviceBusQueue.apiVersion).primaryKey};EntityPath=${queueName}' 
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Access control
+////////////////////////////////////////////////////////////////////////////////
+module addKeyVaultPolicy 'modules/access-control/keyvault-policy-add.module.bicep' = {
+  name: 'addKeyVaultPolicy'
+  params: {
+    keyVaultName: keyvaultName
+    tenantId: tenantId
+    objectId: spnObjectId
   }
 }
