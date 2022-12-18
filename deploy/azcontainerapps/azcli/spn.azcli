@@ -5,3 +5,7 @@ az ad sp list --display-name 'CleanArchitecturePlay'
 $spnName="CleanArchitecturePlay"
 $spnObjectId=$(az ad sp list --display-name $spnName --query '[].objectId' --output tsv)
 $spnObjectId
+
+# Create an Azure Service Principal using the Azure CLI.
+$subscriptionId=$(az account show --query id --output tsv)
+az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role contributor --scopes /subscriptions/$subscriptionId
