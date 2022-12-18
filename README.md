@@ -67,8 +67,8 @@ dotnet add package Microsoft.NET.Build.Containers
 --create container image using dotnet sdk.
 dotnet publish --os linux --arch x64 -c Release -p:PublishProfile=DefaultContainer
 docker images
-docker image tag 2804dd3337bd aknagar/ordering-webapi:1.0.0
-docker push aknagar/ordering-webapi:1.0.0
+docker image tag 2804dd3337bd aknagar/ordering-webapi:1.0.1
+docker push aknagar/ordering-webapi:1.0.1
 
 # run your app using the new container
 docker run -it --rm -p 5010:80 ordering-webapi:1.0.0
@@ -145,3 +145,14 @@ az keyvault secret set --vault-name cakv-dev --name "ConnectionStrings--ServiceB
 ### TODO
 Implement Options pattern for configuration
 Open telemetry
+
+
+### KeyVault
+If we create an SPN and try to read secret from the KeyVault, clientSecret of the SPN gets exposed on web server.
+
+Stop using client secrets and certificates, start using Managed Identities
+
+Managed Identity:
+    System assigned managed identity
+    User assigned managed identity
+https://learn.microsoft.com/en-us/azure/container-apps/managed-identity?tabs=portal%2Cdotnet#common-use-cases

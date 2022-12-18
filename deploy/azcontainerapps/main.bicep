@@ -6,7 +6,6 @@ var keyVaultName = 'cakv-dev-11'
 var containerAppsEnvironmentName = 'containerappenv-dev-11'
 var queueName = 'orders'
 var serviceBusQueueName = '${serviceBusName}/${queueName}'
-var sbPolicyName = 'RootManageSharedAccessKey'
 
 var tenantId = subscription().tenantId
 
@@ -39,8 +38,7 @@ module webApi 'modules/apps/web-api.bicep' = {
     containerAppsEnvironmentId: containerAppsEnv.id    
     containerAppsEnvironmentDomain: containerAppsEnv.properties.defaultDomain
     // serviceBusConnectionString: 'Endpoint=sb://${serviceBusName}.servicebus.windows.net/;SharedAccessKeyName=${sbPolicyName};SharedAccessKey=${listKeys('${serviceBusQueue.id}/AuthorizationRules/${sbPolicyName}', serviceBusQueue.apiVersion).primaryKey}' 
-    serviceBusConnectionString: keyVault.getSecret('ConnectionStrings--ServiceBus')
-    
+    clientsecret: keyVault.getSecret('ConnectionStrings--ServiceBus')
   }
 }
 
