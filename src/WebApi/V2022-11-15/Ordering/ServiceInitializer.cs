@@ -1,6 +1,8 @@
+using Options;
+
 public static partial class ServiceInitializer
 {
-    public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
+    public static IServiceCollection RegisterApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
         // Add services to the DI container.
 
@@ -9,6 +11,9 @@ public static partial class ServiceInitializer
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         
+
+        services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
+
         return services;
     }
 }

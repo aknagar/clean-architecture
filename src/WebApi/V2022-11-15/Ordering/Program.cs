@@ -10,7 +10,7 @@ builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console());
 // https://www.jondjones.com/programming/aspnet-core/how-to/must-know-startupcs-to-programcs-refactoring-tips-in-net-7/ 
 
 // Register Services
-builder.Services.RegisterApplicationServices();
+builder.Services.RegisterApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 

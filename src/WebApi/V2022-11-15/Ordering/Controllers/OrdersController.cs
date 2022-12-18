@@ -5,6 +5,8 @@ using Bogus;
 using clean_architecture.Domain.Entities;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Options;
 
 /// <summary>
 /// https://localhost:7089/orders
@@ -20,17 +22,21 @@ public class OrdersController : ControllerBase
     private readonly ILogger<OrdersController> _logger;
     private readonly IConfiguration _configuration;
 
-    public OrdersController(IConfiguration configuration, ILogger<OrdersController> logger)
+    private readonly JwtOptions _options;
+
+    public OrdersController(IConfiguration configuration, ILogger<OrdersController> logger, IOptions<JwtOptions> options)
     {
          _configuration = configuration;
         _logger = logger;
+        _options = options.Value;
     }
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<WeatherForecast>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<WeatherForecast>>> GetOrdersAsync()
     {
-         _logger.LogError("GetWeatherForecast executed.");
+         _logger.LogError("GetWeatherForecast executed." + _options.TestAttribute);
+        
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

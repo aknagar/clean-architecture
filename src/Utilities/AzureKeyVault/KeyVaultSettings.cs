@@ -10,8 +10,6 @@ public string? TenantId {get; set;}
 
 public string? ClientSecret {get; set;}
 
-public bool? IsUsingManagedIdentity {get; set;}
-
 public bool? ReadSecretsFromKeyVault {get; set;}
 
 }
