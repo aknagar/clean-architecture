@@ -57,6 +57,7 @@ public class OrdersController : ControllerBase
         {
             var ConnectionString = _configuration["ConnectionStrings:ServiceBus"];
             await QueueOrders(orderAmount, ConnectionString);
+            result = true;
         }
 
         if (!result)

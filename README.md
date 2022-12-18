@@ -1,3 +1,13 @@
+## run
+
+dotnet build
+dotnet publish --os linux --arch x64 -c Release -p:PublishProfile=DefaultContainer
+docker images
+docker image tag 9d891df37b7c aknagar/ordering-webapi:1.0.4
+docker push aknagar/ordering-webapi:1.0.4
+
+Goto container app and do a revision upgrade
+
 ## dotnet commands
 https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet
 
