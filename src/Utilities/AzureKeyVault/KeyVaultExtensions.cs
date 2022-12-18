@@ -4,6 +4,7 @@ using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace Utilities.AzureKeyVault;
 
@@ -31,7 +32,7 @@ public static class KeyVaultExtensions
     public static IHostBuilder ConfigureKeyVaultAppConfiguration<TStartup>(this IHostBuilder hostBuilder) where TStartup : class
     {
         return hostBuilder.ConfigureAppConfiguration((context, config) =>
-                                                     {
+                                                     {                                                        
                                                         /*
                                                          if (context.HostingEnvironment.IsDevelopment())
                                                          {
@@ -57,10 +58,15 @@ public static class KeyVaultExtensions
     public static void ConfigureConfigWithKeyVaultSecrets(this IConfigurationBuilder config)
     {
         var builtConfig = config.Build();
-        var vaultConfigSection = builtConfig.GetSection("KeyVault");
-        var vaultUrl = $"https://{vaultConfigSection["KeyVaultName"]}.vault.azure.net/";
+        // var vaultConfigSection = builtConfig.GetSection("KeyVault");
+        KeyVaultSettings keyVaultOptions = new();
+        builtConfig.GetSection("KeyVault").Bind(keyVaultOptions);
+        var options = keyVaultOptions;
+        //var vaultUrl = $"https://{vaultConfigSection["KeyVaultName"]}.vault.azure.net/";
+        var vaultUrl = $"https://{options.KeyVaultName}.vault.azure.net/";
+        
         var isUsingManagedIdentity = builtConfig.GetValue<bool>("IsUsingManagedIdentity");
-
+        
         if (isUsingManagedIdentity)
         {
             var secretClient = new SecretClient(new Uri(vaultUrl),
@@ -69,13 +75,19 @@ public static class KeyVaultExtensions
         }
         else
         {
-            var readSecretsFromKeyVault = vaultConfigSection.GetValue<bool>("ReadSecretsFromKeyVault");
+            // var readSecretsFromKeyVault = vaultConfigSection.GetValue<bool>("ReadSecretsFromKeyVault");
+            var readSecretsFromKeyVault = (bool)options.ReadSecretsFromKeyVault;
 
             if (readSecretsFromKeyVault)
             {
+                /*
                 var clientId = vaultConfigSection["AzureADApplicationId"];
                 var clientSecret = vaultConfigSection["ClientSecret"];
                 var tenantId = vaultConfigSection["TenantId"];
+                */
+                var clientId = options.AzureADApplicationId;                
+                var tenantId = options.TenantId;
+                var clientSecret = options.ClientSecret;
                 var credential = new ClientSecretCredential(tenantId, clientId, clientSecret);
                 var secretClient = new SecretClient(new Uri(vaultUrl), credential);
 

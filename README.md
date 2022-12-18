@@ -171,3 +171,7 @@ MI can be used without storing credentials in code
 
 ### App Service deployment via bicep
 https://larry.claman.net/post/2021-08-19-21-bicep-uami/
+
+### Options pattern for configurable settings
+https://medium.com/the-crazy-coder/net-working-with-options-pattern-34d81fcd3b15
+https://stackoverflow.com/questions/54844022/when-do-we-need-ioptions
