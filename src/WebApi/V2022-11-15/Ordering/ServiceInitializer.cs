@@ -14,6 +14,8 @@ public static partial class ServiceInitializer
 
         services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
 
+        services.AddProblemDetails(options => options.CustomizeProblemDetails = ctx => ctx.ProblemDetails.Extensions.Add("nodeId", Environment.MachineName));
+
         return services;
     }
 }

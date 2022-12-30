@@ -1,3 +1,7 @@
+### TODO
+how to deal with multiple options
+Open telemetry
+
 ## run
 
 dotnet build
@@ -152,11 +156,6 @@ KeyVault:Secrets:Secret1
 
 az keyvault secret set --vault-name cakv-dev --name "ConnectionStrings--ServiceBus" --value "<your-connectionstring>"
 
-### TODO
-Implement Options pattern for configuration
-Open telemetry
-
-
 ### KeyVault
 If we create an SPN and try to read secret from the KeyVault, clientSecret of the SPN gets exposed on in the code.
 
@@ -175,3 +174,10 @@ https://larry.claman.net/post/2021-08-19-21-bicep-uami/
 ### Options pattern for configurable settings
 https://medium.com/the-crazy-coder/net-working-with-options-pattern-34d81fcd3b15
 https://stackoverflow.com/questions/54844022/when-do-we-need-ioptions
+
+### Normal object vs Action delegate in method parameter
+https://softwareengineering.stackexchange.com/questions/255828/what-is-the-benefit-of-passing-a-delegate-to-the-constructor-instead-of-just-hav
+
+
+Controller Action methods
+https://www.michalbialecki.com/en/2020/05/07/asp-net-5-pass-parameters-to-actions/
